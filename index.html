@@ -1,23 +1,716 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+  <style>
+    /* 폰트 및 기본 스타일 설정 */
+    body {
+      font-family: "Noto Sans KR", sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.8;
+      background-color: #f7f9fc;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* 레이아웃 컨테이너 */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* 헤더 스타일 */
+    header {
+      background-color: #004d99; /* 딥 블루 */
+      color: white;
+      padding: 1.5rem 0;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    header .sub-text {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    /* 내비게이션 스타일 */
+    nav {
+      background-color: #0066cc; /* 미디엄 블루 */
+      padding: 0.8rem 0;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: #ffcc00; /* 옐로우 포인트 컬러 */
+      color: #004d99;
+    }
+
+    /* 메인 콘텐츠 영역 */
+    main {
+      padding: 2rem 0;
+    }
+
+    section {
+      background-color: white;
+      margin-bottom: 2rem;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    /* 제목 스타일 */
+    h2 {
+      color: #004d99;
+      font-size: 1.7rem;
+      border-bottom: 3px solid #e0e0e0;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    h3 {
+      color: #0066cc;
+      font-size: 1.3rem;
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* 텍스트 스타일 */
+    p {
+      color: #555;
+      margin-bottom: 1.2rem;
+      font-size: 1rem;
+    }
+
+    ul {
+      list-style-type: disc;
+      margin-left: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: #555;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* 테이블 스타일 */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.95rem;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 1rem;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f0f8ff; /* 연한 블루 */
+      color: #004d99;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    td {
+      background-color: #fff;
+    }
+
+    /* CTA (Call to Action) 스타일 */
+    .cta-button {
+      display: block;
+      width: 100%;
+      max-width: 400px;
+      margin: 2rem auto;
+      background-color: #ff6600;
+      color: white;
+      font-weight: 700;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-align: center;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 10px rgba(255, 102, 0, 0.3);
+    }
+
+    .cta-button:hover {
+      background-color: #e65c00;
+      transform: translateY(-2px);
+    }
+
+    /* 이미지 스타일 */
+    .image-container {
+      margin: 2rem 0;
+      text-align: center;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* FAQ 아코디언 스타일 */
+    .accordion dl dt {
+      background-color: #f0f8ff;
+      border: 1px solid #d0e8ff;
+      padding: 1rem 1.5rem;
+      margin-top: 0.8rem;
+      font-weight: 600;
+      color: #004d99;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .accordion dl dt:hover {
+      background-color: #e6f7ff;
+    }
+
+    .accordion dl dd {
+      padding: 1rem 1.5rem;
+      margin-left: 0;
+      background-color: #fff;
+      border: 1px solid #eee;
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      transition: max-height 0.3s ease-in-out, opacity 0.3s ease;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+    }
+
+    .accordion dl dt.active + dd {
+      max-height: 500px; /* 충분히 큰 값으로 설정 */
+      opacity: 1;
+    }
+
+    /* 폼 스타일 */
+    form {
+      background-color: #f0f8ff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      color: #004d99;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input, .form-group select, .form-group textarea {
+      width: calc(100% - 20px);
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-submit-button {
+      background-color: #0066cc;
+      color: white;
+      font-weight: 700;
+      padding: 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+
+    .form-submit-button:hover {
+      background-color: #004d99;
+    }
+
+    /* 하이라이트 박스 */
+    .highlight-box {
+      background-color: #fceceb; /* 연한 핑크/오렌지 */
+      padding: 1.5rem;
+      border-radius: 8px;
+      border-left: 5px solid #ff6600;
+      margin-top: 1.5rem;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    /* 키워드 태그 스타일 */
+    .keyword-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .keyword-tags span {
+      background-color: #e0f0ff;
+      color: #0066cc;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .keyword-tags span:hover {
+      background-color: #cce0ff;
+    }
+
+    /* 푸터 스타일 */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background-color: #e6eef7;
+      color: #555;
+      font-size: 0.9rem;
+      border-top: 1px solid #ddd;
+    }
+    
+    /* 외부 링크 강조 */
+    .external-link {
+        color: #0066cc;
+        text-decoration: underline;
+        font-weight: 500;
+    }
+    
+    /* 그래프 및 시각화 요소 */
+    .graph-container {
+        margin: 2rem auto;
+        padding: 1.5rem;
+        background-color: #fafafa;
+        border-radius: 10px;
+        border: 1px solid #eee;
+    }
+    .graph-title {
+        text-align: center;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: #004d99;
+    }
+    .bar-chart {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-around;
+        height: 200px;
+        border-bottom: 2px solid #ccc;
+    }
+    .bar {
+        width: 15%;
+        background-color: #0066cc;
+        color: white;
+        text-align: center;
+        font-size: 0.9rem;
+        border-radius: 5px 5px 0 0;
+        transition: height 0.5s ease;
+        position: relative;
+    }
+    .bar-label {
+        position: absolute;
+        bottom: -25px;
+        width: 100%;
+        text-align: center;
+        font-size: 0.8rem;
+        color: #333;
+    }
+    .bar-value {
+        position: absolute;
+        top: -20px;
+        width: 100%;
+        text-align: center;
+        font-weight: 600;
+        color: #004d99;
+    }
+    .bar.rent { background-color: #00994d; } /* Green for Rent */
+    .bar.buy { background-color: #ffcc00; } /* Yellow for Buy */
+
+    /* 모바일 반응형 디자인 */
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      nav a {
+        padding: 0.5rem;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      section {
+        padding: 1.5rem;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
+      .keyword-tags span {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+
+  <!-- JSON-LD Structured Data for Service -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "법인차량 리스 비교 견적 서비스",
+    "provider": {
+      "@type": "Organization",
+      "name": "법인차량 리스 전문가 그룹",
+      "url": "https://yourdomain.com",
+      "logo": "https://yourdomain.com/logo.png"
+    },
+    "areaServed": "대한민국",
+    "description": "2026년 최신 세금 규정 및 시장 동향을 반영한 법인차 리스 견적 비교 서비스. 고객 맞춤형 컨설팅을 통해 최적의 비용과 혜택을 제공합니다.",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "법인차 리스 상품 목록",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Product",
+            "name": "운용 리스 (자산 미포함)"
+          },
+          "description": "월 리스료 전액 비용처리 가능, 만기 시 반납/인수 선택. 일반 번호판 사용."
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Product",
+            "name": "금융 리스 (자산 포함)"
+          },
+          "description": "차량 소유권은 리스 이용자에 있으며, 감가상각비와 이자 비용으로 세금 처리. 만기 시 자동 인수."
+        }
+      ]
+    }
+  }
+  </script>
+
+</head>
+<body>
+  <header>
+    <h1>법인차 리스 비용: 2026년 최신 절세 전략 가이드</h1>
+    <p class="sub-text">법인 장기렌트와 비교, 신규 혜택, 저렴한 업체 추천까지 완벽 분석</p>
+  </header>
+  
+  <nav>
+    <div class="container">
+      <ul>
+        <li><a href="#intro">서비스 소개</a></li>
+        <li><a href="#comparison">리스 vs 렌트 vs 구매 비교</a></li>
+        <li><a href="#cost">비용 및 견적 분석</a></li>
+        <li><a href="#benefits">절세 혜택 및 주의사항</a></li>
+        <li><a href="#faq">자주 묻는 질문</a></li>
+        <li><a href="#quote">실시간 견적 문의</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section id="intro">
+      <h2>1. 법인차 리스, 2026년 왜 필수 선택이 되었나?</h2>
+      <div class="image-container">
+        <!-- Pexels.com royalty-free image placeholder -->
+        <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="사무실에서 비즈니스 미팅을 하는 사람들" loading="lazy">
+      </div>
+      <p>빠르게 변화하는 2026년 비즈니스 환경에서 기업의 효율적인 자산 운용은 생존과 성장의 핵심입니다. 법인차량 리스는 단순히 차량을 빌려 쓰는 것을 넘어, 법인세 절감과 현금 유동성 확보라는 두 마리 토끼를 잡을 수 있는 전략적 대안으로 각광받고 있습니다.</p>
+      <p>특히 고가 수입차 또는 프리미엄 국산차를 업무용으로 이용하는 법인이나 개인사업자에게 법인차 리스는 가장 합리적인 선택으로 여겨집니다. 차량 구입 시 발생하는 취득세, 등록세, 자동차세 등의 초기 비용 부담 없이 월 리스료만으로 차량 운용이 가능하며, 회계 처리가 단순해져 업무 효율성을 높일 수 있습니다.</p>
+      <p>하지만 리스 상품은 금융 상품의 특성을 지니고 있어 계약 기간, 잔존가치, 금리 변동에 따라 총 지불 금액이 크게 달라질 수 있습니다. 또한 2026년 세법 기준을 정확히 이해하지 못하면 충분한 절세 효과를 누리지 못할 수도 있습니다. 따라서 전문 컨설턴트와의 충분한 상담을 통해 회사 상황에 맞는 최적의 견적을 찾는 것이 중요합니다.</p>
+
+      <h3>핵심 키워드 분석 (Naver/Google 검색 엔진 최적화)</h3>
+      <div class="keyword-tags">
+        <span>법인차 리스</span><span>법인차량 리스 비용</span><span>법인 장기렌트</span><span>법인차 리스 장점 단점</span><span>법인차 세금 처리</span><span>법인차 리스 견적</span><span>법인 리스 추천</span><span>법인차 리스 저렴한 곳</span><span>2026년 법인차 세법</span><span>법인차 비교</span><span>법인차량 리스 전문 업체</span><span>법인차 할인</span><span>법인차량 후기</span><span>법인차 구매 vs 리스</span><span>법인차 장기렌트 가격</span><span>법인차 운용리스</span><span>법인차 금융리스</span><span>법인차 신규 가입 혜택</span><span>법인차 리스 순위</span><span>법인차 현금 지원</span><span>법인차 승계</span><span>법인차 비용처리 한도</span><span>법인차 세금 절감</span><span>법인차 월 납입금 평균</span><span>리스 이자율 비교</span><span>법인차량 연말정산</span><span>법인차 재산세 영향</span><span>법인차량 부가세 환급</span><span>법인차 전기차 리스</span><span>법인차 싼곳</span>
+      </div>
+    </section>
+
+    <section id="comparison">
+      <h2>2. 법인차 리스 vs. 장기렌트 vs. 구매: 현명한 선택 기준</h2>
+      <p>법인차량 운용 방식은 크게 리스, 장기렌트, 직접 구매(현금/할부) 세 가지로 나눌 수 있습니다. 이 중 어떤 방식이 가장 유리한지는 회사의 규모, 재무 구조, 운행 목적, 신용도 등 다양한 요인에 따라 달라집니다. 아래 표를 통해 각 방식의 장단점을 명확히 비교해보고, 귀사에 맞는 최적의 방식을 선택해 보세요.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>구분</th>
+            <th>법인차 리스 (운용리스 기준)</th>
+            <th>법인 장기렌트</th>
+            <th>직접 구매 (할부/현금)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>차량 번호판</strong></td>
+            <td>일반 번호판 (예: 12가 1234)</td>
+            <td>'하, 허, 호' 번호판</td>
+            <td>일반 번호판</td>
+          </tr>
+          <tr>
+            <td><strong>초기 비용</strong></td>
+            <td>취등록세, 자동차세 없음. 보증금/선납금 선택 가능. 초기 비용 최소화 가능.</td>
+            <td>취등록세, 자동차세 없음. 보증금/선납금 선택 가능. 초기 비용 최소화 가능.</td>
+            <td>취등록세, 자동차세 등 초기 비용 발생.</td>
+          </tr>
+          <tr>
+            <td><strong>세금 처리 방식</strong></td>
+            <td>월 리스료 전액 비용처리 (연간 한도 1,500만원 내)</td>
+            <td>월 렌트료 전액 비용처리 (연간 한도 1,500만원 내)</td>
+            <td>감가상각비, 유류비, 보험료 등 유지비용 개별 처리.</td>
+          </tr>
+          <tr>
+            <td><strong>보험 및 관리</strong></td>
+            <td>이용자 명의로 직접 가입. 사고 시 보험료 할증 가능. 보험 경력 유지.</td>
+            <td>렌트사 명의로 일괄 가입. 사고 시 보험료 할증 없음.</td>
+            <td>이용자 명의로 직접 가입. 사고 시 보험료 할증 가능.</td>
+          </tr>
+          <tr>
+            <td><strong>회계 처리 (부채 여부)</strong></td>
+            <td>부채로 인식되지 않음 (운용리스). 재산세, 건강보험료 상승 영향 적음.</td>
+            <td>부채로 인식되지 않음. 재산세, 건강보험료 상승 영향 없음.</td>
+            <td>법인 자산으로 인식되어 부채 비율 증가. 재산세, 건강보험료 상승 가능.</td>
+          </tr>
+          <tr>
+            <td><strong>만기 시 선택</strong></td>
+            <td>반납, 인수, 재리스 선택 가능.</td>
+            <td>반납, 인수, 재렌트 선택 가능.</td>
+            <td>본인 소유.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p><strong>결론:</strong> 법인차 리스는 외관상 일반 차량과 동일한 번호판을 사용하면서도 초기 비용 부담이 적고 세금 처리가 간편하여 대표님 및 임원 차량으로 선호됩니다. 반면, 장기렌트는 사고 시 보험료 할증 부담이 없고 차량 관리가 편리해 직원용 차량으로 추천되는 경우가 많습니다.</p>
+      
+      <h3>법인차 선택 시 체크포인트</h3>
+      <ul>
+          <li><strong>품위 유지 vs. 비용 절감:</strong> 일반 번호판을 원한다면 리스를, 월 납입금 최저가를 원한다면 장기렌트를 고려하세요.</li>
+          <li><strong>차량 관리:</strong> 차량 관리를 직접 할 여력이 있다면 리스를, 모든 관리를 맡기고 싶다면 렌트를 선택하세요.</li>
+          <li><strong>보험 경력:</strong> 개인 보험 경력을 유지하고 싶다면 리스를, 직원들의 잦은 사고로 보험료 할증이 걱정된다면 렌트를 선택하세요.</li>
+      </ul>
+    </section>
+
+    <section id="cost">
+      <h2>3. 법인차 리스 비용 상세 분석: 견적을 결정하는 5가지 요소</h2>
+      <p>법인차 리스 견적은 단순한 월 납입금이 아니라, 총 비용을 종합적으로 고려해야 합니다. 2026년 기준으로 법인차 리스 비용을 결정하는 주요 요소와 함께 저렴한 견적을 받는 방법을 알아보겠습니다.</p>
+
+      <h3>3.1. 견적의 기본 구성: 차량 가격, 잔존가치, 금리</h3>
+      <p>월 리스료는 크게 차량 감가상각비(차량 가격 - 잔존가치)와 이자 비용으로 구성됩니다. 차량 등급에 따른 평균 금액 차이는 크지 않지만, 리스사별로 적용되는 금리와 잔존가치 설정에 따라 최종 비용이 달라집니다.</p>
+      <div class="highlight-box">
+          <strong>2026년 핵심 체크: 잔존가치와 인수 비용</strong><br>
+          잔존가치(계약 만료 시 차량 가치)를 높게 설정하면 월 리스료가 저렴해지지만, 만기 후 인수 시 부담해야 할 금액이 높아집니다. 반납을 염두에 둔다면 고잔가 리스를, 인수를 염두에 둔다면 저잔가 리스를 선택하는 것이 유리합니다.
+      </div>
+
+      <h3>3.2. 법인차 리스 초기 비용: 보증금 vs. 선납금</h3>
+      <p>법인차 리스의 장점 중 하나는 초기 비용을 최소화할 수 있다는 점입니다. 보증금과 선납금 설정에 따라 견적 금액과 회계 처리가 달라지므로 차이점을 정확히 이해해야 합니다.</p>
+      <ul>
+        <li><strong>보증금:</strong> 차량 사고 발생 시 리스료 미납 등에 대비한 보증금으로, 만기 시 전액 환불받거나 인수 금액에 대체 가능합니다.</li>
+        <li><strong>선납금:</strong> 리스 기간 동안의 리스료를 미리 납부하는 것으로, 만기 시 환불되지 않습니다. 월 납입금 자체를 낮추는 효과가 있습니다.</li>
+      </ul>
+
+      <h3>3.3. 법인차 리스 견적의 핵심: 신용도와 금리 변동성</h3>
+      <p>법인차 리스는 금융 상품이기 때문에 리스 심사 시 법인의 신용도와 대표자의 개인 신용도가 중요하게 작용합니다. 신용도가 높을수록 더 낮은 금리를 적용받아 월 리스료를 절감할 수 있습니다.</p>
+      <p>또한 금리 변동에 따라 리스료 부담이 가중될 수 있다는 점은 리스의 단점입니다. 2026년 금리 변동 예측을 고려하여 리스 상품을 선택하는 것이 중요합니다.</p>
+
+      <h3>3.4. 저렴한 법인차 리스 견적 찾는 방법</h3>
+      <p>전문 업체들은 다수의 캐피털사와 제휴하여 실시간으로 금리 및 프로모션을 비교하여 고객에게 가장 저렴한 견적을 제공합니다. <strong>신규 가입 혜택, 제휴 할인, 연말 프로모션</strong> 등을 적극 활용하면 <strong>평균 금액</strong>보다 훨씬 저렴하게 계약할 수 있습니다. <strong>사은품, 현금지원, 상품권</strong> 등의 추가 혜택도 놓치지 마세요.</p>
+      <a href="#quote" class="cta-button">실시간 견적 비교로 최저가 찾기</a>
+    </section>
+
+    <section id="benefits">
+      <h2>4. 2026년 법인차 리스 절세 혜택 완벽 가이드</h2>
+      <p>법인차 리스를 선택하는 가장 큰 이유는 바로 '절세'입니다. 2026년 최신 세법 기준에 따라 법인차 리스 비용처리 방법과 한도를 상세히 안내해 드립니다.</p>
+
+      <h3>4.1. 법인차 리스 비용처리 한도 (2026년 기준)</h3>
+      <p>업무용 승용차 관련 비용처리 한도는 2026년에도 차량 1대당 연간 1,500만 원으로 유지됩니다. 이 한도 내에서 리스료, 유류비, 수리비 등 모든 비용이 경비로 인정됩니다.</p>
+      <ul>
+        <li><strong>운행일지 작성 시:</strong> 업무 사용 비율에 따라 1,500만 원 초과분도 추가 인정됩니다.</li>
+        <li><strong>운행일지 미작성 시:</strong> 1,500만 원까지만 비용 인정됩니다.</li>
+        <li><strong>감가상각비 상당액 한도:</strong> 연간 800만 원. 리스료에는 이 금액이 포함되어 계산됩니다.</li>
+        <li><strong>경차/9인승 이상 차량:</strong> 부가세 환급 대상이며, 비용처리 한도가 적용되지 않아 전액 비용처리가 가능합니다.</li>
+      </ul>
+
+      <h3>4.2. 법인 리스 vs. 렌트 부가세 환급 차이점</h3>
+      <p>법인사업자에게 부가세 환급은 중요한 절세 요소입니다. 리스와 렌트의 부가세 환급 여부는 다음과 같습니다.</p>
+      <div class="highlight-box">
+          <strong>법인차 리스: 부가세 환급 가능</strong> (운용리스/금융리스 모두 해당. 단, 리스료에 포함된 부가세에 한하며, 경차/화물차/9인승 이상 승용차 등 부가세 환급 대상 차량에 한하여 가능)<br>
+          <strong>법인 장기렌트: 부가세 환급 불가</strong> (렌터카는 면세 사업이기 때문에 월 렌트료에 부가세가 포함되지 않습니다.)
+      </div>
+      <p>따라서 부가세 환급을 통해 더 많은 세금 절감 효과를 원한다면 법인차 리스가 더 유리할 수 있습니다.</p>
+
+      <h3>4.3. 법인차 리스 이용 시 주의사항: 중도 해지 및 승계</h3>
+      <p>법인차 리스는 계약 기간 동안의 약정이 중요합니다. 중도 해지 시 계약서에 명시된 위약금을 지불해야 하며, 이는 잔여 리스료의 상당 부분을 차지할 수 있어 금전적 손실이 큽니다. 만약 중도 해지 가능성이 있다면, 리스 승계 플랫폼을 통해 잔여 계약 기간을 넘겨받을 승계자를 찾는 것이 좋습니다.</p>
+      <p>계약 전 꼼꼼한 약정 검토와 함께, 법인차 리스 전문 업체의 컨설팅을 통해 향후 만기 시점의 인수/반납 전략을 미리 수립하는 것이 중요합니다.</p>
+    </section>
+    
+    <section id="faq" class="accordion">
+      <h2>5. 법인차 리스 자주 묻는 질문 (FAQ)</h2>
+      <dl>
+        <dt tabindex="0" aria-expanded="false">Q1. 법인차 리스와 장기렌트 중 어떤 것이 더 유리한가요?</dt>
+        <dd>A. 두 상품 모두 비용처리가 가능하지만 차이점이 있습니다. 품위 유지(일반 번호판)와 개인 보험 경력 유지를 원하시면 리스가, 사고 시 보험료 할증 걱정 없이 관리가 편리한 것을 원하시면 장기렌트가 유리합니다.</dd>
+        <dt tabindex="0" aria-expanded="false">Q2. 리스 계약 시 신용 등급에 영향을 미치나요?</dt>
+        <dd>A. 네, 운용리스는 금융 상품이므로 신용도에 영향을 미칠 수 있습니다. 다만, 리스 이용자에게 유리하도록 설계된 상품도 많으므로, 자세한 사항은 상담 시 문의해 주시기 바랍니다.</dd>
+        <dt tabindex="0" aria-expanded="false">Q3. 법인차 리스 견적을 받을 때 필요한 서류는 무엇인가요?</dt>
+        <dd>A. 법인 등기부 등본, 사업자등록증, 재무제표(손익계산서), 대표자 신분증 및 인감 증명서 등이 필요합니다. 심사 과정에서 매출 규모와 재무 상태를 확인하며, 신설 법인은 별도의 심사 기준이 적용될 수 있습니다.</dd>
+        <dt tabindex="0" aria-expanded="false">Q4. 만기 시 차량 인수를 염두에 두고 있다면 어떤 점을 고려해야 하나요?</dt>
+        <dd>A. 만기 시 차량 인수를 원한다면 잔존가치를 낮게 설정하는 것이 유리합니다. 초기 월 납입금은 다소 높아지지만, 만기 시 부담해야 할 인수 금액(잔존가치)이 줄어들어 총비용 측면에서 절감 효과를 볼 수 있습니다.</dd>
+        <dt tabindex="0" aria-expanded="false">Q5. 법인차 리스 상품은 어떤 업체가 가장 저렴한가요?</dt>
+        <dd>A. 법인차 리스 업체별로 금리 조건과 프로모션이 상이합니다. 단일 업체(캐피탈사)와 계약하는 것보다 여러 업체의 견적을 실시간으로 비교해주는 전문 비교 견적 업체를 통해 견적을 받는 것이 가장 저렴합니다. 저희는 다수의 캐피탈사 및 리스사를 비교 분석하여 고객님께 최적의 견적을 제공합니다.</dd>
+      </dl>
+    </section>
+    
+    <section id="ranking">
+        <h2>6. 법인차 리스 전문 업체 순위 및 비교 기준 (2026년)</h2>
+        <p>법인차 리스 시장은 다양한 캐피털사와 전문 에이전시가 경쟁하고 있습니다. 2026년 기준으로 <strong>법인차 리스 업체 순위</strong>는 단순히 <strong>싼곳</strong>을 찾는 것을 넘어, <strong>전문성</strong>과 <strong>서비스 품질</strong>을 종합적으로 고려해야 합니다. 특히 <strong>내돈내산 후기</strong>를 참고하여 계약 과정의 투명성과 사후 관리(정비, 사고 처리) 수준을 확인하는 것이 중요합니다.</p>
+        <p><strong>주요 법인차 리스 업체 (2026년 시장 점유율 기반)</strong></p>
+        <ul>
+            <li><strong>현대캐피탈:</strong> 높은 인지도와 안정적인 금융 상품을 제공하며, 현대차/기아차 리스 시 프로모션이 강점입니다.</li>
+            <li><strong>롯데렌터카/SK렌터카:</strong> 대형 렌터카사이지만 리스 상품도 취급하며, 차량 관리 서비스가 체계적입니다.</li>
+            <li><strong>오토리스 전문 에이전시 (비교 견적 플랫폼):</strong> 여러 캐피털사의 상품을 동시에 비교하여 <strong>최저가 견적</strong>을 찾아주고, 신규 고객 대상 <strong>할인 혜택</strong>이나 <strong>현금 지원 이벤트</strong>를 제공하는 경우가 많습니다.</li>
+        </ul>
+        <div class="highlight-box">
+            <strong>현명한 업체 선택 전략:</strong> <br>
+            단일 업체 견적에만 의존하지 마세요. 여러 업체의 견적을 비교하고, 특히 <strong>신규 가입 혜택</strong>과 <strong>사은품</strong>, <strong>지원금</strong>을 꼼꼼히 체크하면 더 <strong>저렴한</strong> 가격으로 리스할 수 있습니다. <strong>전문 업체</strong>의 컨설팅을 통해 2026년 <strong>세금</strong> 규정에 맞는 최적의 <strong>비용</strong> 구조를 설계하세요.
+        </div>
+    </section>
+
+    <section id="quote">
+      <h2>7. 법인차 리스 실시간 견적 문의 (신규 가입 혜택 제공)</h2>
+      <p>고객님의 법인 특성과 운용 계획에 최적화된 맞춤형 견적을 받아보세요. 2026년 최신 시장 프로모션 및 <strong>신규 가입 혜택</strong>을 적용하여 가장 <strong>저렴한</strong> 견적을 안내해 드립니다. <strong>평균</strong> 견적 <strong>금액</strong>보다 더 나은 조건을 찾을 수 있도록 <strong>전문 업체</strong>가 1:1 상담을 진행합니다.</p>
+      <form action="#" method="post">
+        <div class="form-group">
+          <label for="name">담당자 이름*</label>
+          <input type="text" id="name" name="name" required placeholder="이름을 입력해 주세요">
+        </div>
+        <div class="form-group">
+          <label for="phone">연락처*</label>
+          <input type="tel" id="phone" name="phone" required placeholder="010-0000-0000">
+        </div>
+        <div class="form-group">
+            <label for="company_name">법인명*</label>
+            <input type="text" id="company_name" name="company_name" required placeholder="회사명을 입력해 주세요">
+        </div>
+        <div class="form-group">
+          <label for="car_type">희망 차량 모델*</label>
+          <input type="text" id="car_type" name="car_type" required placeholder="예: 제네시스 G80, 벤츠 E클래스, 기아 K8 등">
+        </div>
+        <div class="form-group">
+          <label for="lease_type">희망 리스/렌트 방식*</label>
+          <select id="lease_type" name="lease_type" required>
+            <option value="">선택</option>
+            <option value="lease">법인 리스 (일반 번호판)</option>
+            <option value="rent">법인 장기렌트 ('하, 허, 호' 번호판)</option>
+            <option value="comparison">리스/렌트 비교 상담 희망</option>
+          </select>
+        </div>
+        <div class="form-group">
+            <label for="contract_term">희망 계약 기간 (개월)*</label>
+            <input type="number" id="contract_term" name="contract_term" required placeholder="예: 48개월 (4년)">
+        </div>
+        <div class="form-group">
+            <label for="request_message">상담 요청 사항</label>
+            <textarea id="request_message" name="request_message" placeholder="특별히 궁금한 점이나 원하는 혜택(할인, 사은품 등)이 있다면 적어주세요."></textarea>
+        </div>
+        <button type="submit" class="form-submit-button">견적 문의 신청하기</button>
+      </form>
+    </section>
+    
+    <section id="external-links">
+        <h2>8. 신뢰성 있는 외부 사이트 참조</h2>
+        <p>법인차 리스에 대한 정확한 정보와 2026년 최신 세법 내용을 확인하실 수 있는 신뢰성 있는 외부 사이트입니다.</p>
+        <ul>
+            <li><a href="https://www.nts.go.kr/" target="_blank" class="external-link">국세청 (National Tax Service)</a>: 업무용 승용차 관련 비용처리 기준 및 세법 개정 내용을 확인할 수 있습니다.</li>
+            <li><a href="https://www.fss.or.kr/" target="_blank" class="external-link">금융감독원 (Financial Supervisory Service)</a>: 리스 계약 관련 금융 소비자 보호 규정 및 유의사항을 안내합니다.</li>
+            <li><a href="https://namu.wiki/w/%EC%9E%A5%EA%B8%B0%EB%A0%8C%ED%8A%B8" target="_blank" class="external-link">나무위키 - 장기렌트</a>: 장기렌트 및 리스의 개념과 장단점을 일반인의 시각에서 비교 분석한 정보를 제공합니다.</li>
+            <li><a href="https://www.gov.kr/portal/main" target="_blank" class="external-link">대한민국 정부포털</a>: 차량 등록 및 세금 관련 법령 정보를 확인할 수 있습니다.</li>
+            <li><a href="https://www.kofia.or.kr/" target="_blank" class="external-link">금융투자협회 (Korea Financial Investment Association)</a>: 캐피털 시장 동향 및 금리 정보를 참고할 수 있습니다.</li>
+        </ul>
+    </section>
+
+  </main>
+
+
+  <script>
+    // FAQ 아코디언 기능 (접기/펼치기)
+    document.querySelectorAll('.accordion dl dt').forEach((dt) => {
+      dt.addEventListener('click', () => {
+        const dd = dt.nextElementSibling;
+        const expanded = dt.getAttribute('aria-expanded') === 'true';
+
+        // Close all other open items
+        document.querySelectorAll('.accordion dl dt').forEach((otherDt) => {
+          if (otherDt !== dt) {
+            otherDt.classList.remove('active');
+            otherDt.setAttribute('aria-expanded', 'false');
+            otherDt.nextElementSibling.style.maxHeight = null;
+            otherDt.nextElementSibling.style.opacity = 0;
+          }
+        });
+
+        // Toggle current item
+        if (expanded) {
+          dt.classList.remove('active');
+          dt.setAttribute('aria-expanded', 'false');
+          dd.style.maxHeight = null;
+          dd.style.opacity = 0;
+        } else {
+          dt.classList.add('active');
+          dt.setAttribute('aria-expanded', 'true');
+          dd.style.maxHeight = dd.scrollHeight + 'px';
+          dd.style.opacity = 1;
+        }
+      });
+      dt.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          dt.click();
+        }
+      });
+    });
+
+    // Simple smooth scroll for navigation links
+    document.querySelectorAll('nav a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+  </script>
+  
